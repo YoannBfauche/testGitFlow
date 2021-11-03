@@ -12,11 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Create Pull Request
+        id: cpr
         uses: peter-evans/create-pull-request@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: add test file
-          title: 'example titre PR'
-          body: >
-            This PR is auto-generated
-          labels: automated PR, Feature
+      - name: Check outputs
+        run: |
+          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
+          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
