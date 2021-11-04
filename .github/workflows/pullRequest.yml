@@ -1,20 +1,23 @@
+name: Auto-PR Feature
 on:
-
   push:
     branches: [ Feature/** ]
-
-  
-  workflow_dispatch:
-name: create-pull-request workflow
+    
 jobs:
-  createPullRequest:
+  pull-request:
+    name: Open PR to develop
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Create Pull Request
-        id: cpr
-        uses: peter-evans/create-pull-request@v3
-      - name: Check outputs
-        run: |
-          echo "Pull Request Number - ${{ steps.cpr.outputs.pull-request-number }}"
-          echo "Pull Request URL - ${{ steps.cpr.outputs.pull-request-url }}"
+    - uses: actions/checkout@v2
+      name: checkout
+      
+    - uses: repo-sync/pull-request@v2
+      name: pull-request
+      with:
+        destination_branch: "develop"
+        pr_title: "Pulling ${{ github.ref }} into develop"
+        pr_body: "*Automated Generate PR*"
+        pr_reviewer: "DevFauche"
+        pr_draft: true
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        
