@@ -15,7 +15,7 @@ jobs:
       name: pull-request
       with:
         destination_branch: "develop"
-        pr_title: "Pulling ${{ github.ref }} into develop"
+        pr_title: "Pulling *'${{ github.ref }}'* into develop"
         pr_body: " :bangbang: *Automated Generate PR* with this runner :fast_forward: ${{ runner.name }}"
         pr_reviewer: "DevFauche,YoannBfauche"
         pr_assignee: "${{ github.actor }}"
