@@ -13,7 +13,16 @@ Le principe est simple pour chaque nouvelle feature les étapes sont les suivant
 ## Etape 1 : créer une feature
 
 La création d'une feature consiste a créer une branche en partant de develop.  
-Pour ce faire nous allons lancer la commande suivante depuis la branche develop    
-`git checkout -b [Type]/[branchName]`
+Pour ce faire nous allons lancer la commande suivante depuis la branche develop :
 
-La branche a bien était créer et nous allons pouvoir 
+> `git checkout -b "(type)/(branchID)/(branchName)"`
+ Avec :
+ - (type)
+  - Feature
+  - BugFix 
+
+ - (branchID)
+  - 3 digits exemple : 005
+ - (branchName)
+  - le sujet du développement lié à cette branche
+
