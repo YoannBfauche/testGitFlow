@@ -1,7 +1,7 @@
 name: Auto-PR Feature
 on:
   push:
-    tags: [Feature/startPR/**]
+    branches: [Feature/**]
     
 jobs:
   pull-request:
@@ -15,9 +15,10 @@ jobs:
       name: pull-request
       with:
         destination_branch: "develop"
-        pr_title: "Pulling ${{ github.ref }} into develop"
-        pr_body: "*Automated Generate PR*"
+        pr_title: "Pulling *${{ github.ref }}* into develop"
+        pr_body: " :bangbang: *Automated Generate PR* with this runner :fast_forward: ${{ RUNNER_NAME }}"
         pr_reviewer: "DevFauche,YoannBfauche"
+        pr_assignee: "${{ GITHUB_ACTOR }}"
         pr_draft: false
         github_token: ${{ secrets.GITHUB_TOKEN }}
         
