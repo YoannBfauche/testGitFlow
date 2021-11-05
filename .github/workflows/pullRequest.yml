@@ -10,18 +10,27 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       name: checkout
-      
-    - uses: repo-sync/pull-request@v2
-      name: pull-request
+    
+    - name: draft pull-request 
+      if : "!contains(github.event.head_commit.message,'[startPR]')"
+      uses: repo-sync/pull-request@v2 
       with:
         destination_branch: "develop"
         pr_title: "Pulling *'${{ github.ref }}'* into develop"
-        pr_body: " :bangbang: *Automated Generate PR* with this runner :fast_forward: ${{ runner.name }}"
+        pr_body: " :bangbang: *Automated Generate PR* with this runner :fast_forward:"
         pr_reviewer: "DevFauche,YoannBfauche"
         pr_assignee: "${{ github.actor }}"
-        if : contains($(git rev-parse --short "$GITHUB_SHA"),'[startPR]')
-        pr_draft: false 
-        if : "!contains($(git rev-parse --short "$GITHUB_SHA"),'[startPR]')"
-        prt_draft: true
+        pr_draft: true
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        
+
+    - name: pull-request
+      if : "contains(github.event.head_commit.message,'[startPR]')"
+      uses: repo-sync/pull-request@v2 
+      with:
+        destination_branch: "develop"
+        pr_title: "Pulling *'${{ github.ref }}'* into develop"
+        pr_body: " :bangbang: *Automated Generate PR* with this runner :fast_forward:"
+        pr_reviewer: "DevFauche,YoannBfauche"
+        pr_assignee: "${{ github.actor }}"
+        pr_draft: false
+        github_token: ${{ secrets.GITHUB_TOKEN }}
