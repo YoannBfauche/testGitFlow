@@ -19,11 +19,9 @@ jobs:
         pr_body: " :bangbang: *Automated Generate PR* with this runner :fast_forward: ${{ runner.name }}"
         pr_reviewer: "DevFauche,YoannBfauche"
         pr_assignee: "${{ github.actor }}"
-        - name : draft false
-          if : contains($(git rev-parse --short "$GITHUB_SHA"),'[startPR]')
-          pr_draft: false
-        - name : draft true
-          if : "!contains($(git rev-parse --short "$GITHUB_SHA"),'[startPR]')"
-          prt_draft: true
+        if : contains($(git rev-parse --short "$GITHUB_SHA"),'[startPR]')
+        pr_draft: false 
+        if : "!contains($(git rev-parse --short "$GITHUB_SHA"),'[startPR]')"
+        prt_draft: true
         github_token: ${{ secrets.GITHUB_TOKEN }}
         
