@@ -2,6 +2,7 @@ name: Auto-PR Feature
 on:
   push:
     branches: [ Feature/** ]
+    tags: [startRequest]
     
 jobs:
   pull-request:
@@ -17,7 +18,7 @@ jobs:
         destination_branch: "develop"
         pr_title: "Pulling ${{ github.ref }} into develop"
         pr_body: "*Automated Generate PR*"
-        pr_reviewer: "DevFauche"
-        pr_draft: true
+        pr_reviewer: "DevFauche,YoannBfauche"
+        pr_draft: false
         github_token: ${{ secrets.GITHUB_TOKEN }}
         
