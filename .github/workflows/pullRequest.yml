@@ -15,7 +15,7 @@ jobs:
       uses: haya14busa/action-cond@v1
       id: draftCondition
       with:
-        cond: "contains(github.event.head_commit.message,'[startPR]')" # pass a draft pr into a non draft pr work ? 
+        cond: "contains(github.event.head_commit.message,'[startPR]')" # pass a draft pr into a non draft pr work ? failled test restart 
         if_true: false #draft is false 
         if_false: true # draft is true
 
