@@ -77,10 +77,10 @@ Les githubs Actions nous permettent de réaliser des pull Request automatique.
 
 ### Git Push githubActions
 
-Lorsque l'on push sur github les commits réalisé, si le format du nom de branche correspond à une nouvelle feature alors l'action github ce lance. 
-Cependant au lancement de l'actions pour créer la pull request, l'actions utilise le dernier commit pour savoir quoi faire.
+Lorsque l'on push les commits réalisé sur github, si le format du nom de branche correspond à une nouvelle feature alors l'action github ce lance. 
+Cependant au lancement de l'actions pour créer la pull request, l'actions utilise le dernier commit pour savoir quoi faire il faut donc ajouter un paramètre dans le message de commit.
 
-les parametres : 
+Les paramètres : 
   1. "[draftPR]"  
   il permet de lancer la création de la pull request en mode draft. Ce mode permet d'afficher la pull request de la feature permettant a tout le monde de visualisé le développement en cours, cependant le mode draft indique que le travaille n'est pas tout a fait fini et qu'il faut attendre avant de faire la première review et de fusionné le code dans la branche develop.
   2. "[startPR]"  
@@ -92,4 +92,38 @@ lors du dernier commit avant de push rajouter le paramètre dans le commit
 > ❗ Si aucun paramètre n'a était fournit la Pr n'est pas créer 
 
 La github action gérant les PR automatiques est accessible [ici](.github/workflows/pullRequest.yml)
+
+## Etape 4 : Mettre a joure le Repo local .
+
+Lorsque l'on travaille a plusieurs sur github il faut ce mettre a jour pour obtenir les modifications des collégues de travaille. 
+Example :
+> 2 personnes on créer des features différentes, aprés le premier push, une nouvelle branche pour chaque feature apparait sur github.  
+> lorsque la feature est terminer et que l'on ajoute les modifications a la branche develop, la branche de cette feature est supprimé de github. cependant elle n'est pas supprimé du répertoire local. il faut aussi pouvoir récupérer les modifications ajouter dans develop.
+
+Pour ce faire a chaque fois que l'on veux faire une nouvelle action depuis la branche develop il faudra faire les commandes suivantes: 
+
+> Mettre à jour develop   
+``` 
+git checkout develop
+git pull 
+```
+>  
+>  Verifier l'existance des branches sur github  
+`git remote show origin`  
+
+> Supprimer les liens entre les brances local et les branches supprimé en remote   
+`git remote prune origin `
+ 
+> Supprimer une branche local qui n'est plus utilisé  
+ `git branch -d <branchName> `  
+ facultative, la supression n'est pas obligatoire on peut garder la branche si l'on veux pouvoir re travailler sur cette feature en particulier
+
+
+
+# La gestion des releases 
+
+Pour réaliser une realease nous allons partir de la branche develop.
+La release consiste a lancer faire une nouvelle version en production avant cela nous devont réaliser des tests pour verifier que cette version sera fonctionelle en prod.
+Pour cela nous utilison la branche de test.
+
 
