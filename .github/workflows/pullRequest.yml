@@ -17,9 +17,9 @@ jobs:
       uses: haya14busa/action-cond@v1
       id: draftCondition
       with:
-        cond: "contains(github.event.head_commit.message,'[startPR]')"
-        if_true: false #draft is false 
-        if_false: true # draft is true
+        cond: "contains(github.event.head_commit.message,[draftPR])"
+        if_true: true #draft is false 
+        if_false: false # draft is true
 
     - name: create pull-request 
       if: "contains(github.event.head_commit.message,'[startPR]') || contains(github.event.head_commit.message,'[draftPR]')"
@@ -30,5 +30,7 @@ jobs:
         pr_body: " :bangbang: *Automated Generate PR* with this runner :fast_forward:"
         pr_reviewer: "DevFauche,YoannBfauche"
         pr_assignee: "${{ github.actor }}"
-        pr_draft: ${{ steps.draftCondition.outputs.value }} # add draft mode or not, Cant pass a draft pr to open pr by ths strategy.
+        pr_draft: ${{ steps.draftCondition.outputs.value }} # add draft mode or not.
         github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: echo Draft Value
+      run: echo "The selected draft value is ${{ steps.draftCondition.outputs.value}}"
