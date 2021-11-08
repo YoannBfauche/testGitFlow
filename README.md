@@ -25,13 +25,14 @@ Pour ce faire nous allons lancer la commande suivante depuis la branche develop 
     - 3 digits exemple : 005
  3. branchName
     - le sujet du développement lié à cette branche
-La branche est créer et nous sommes actuellement a la racine de cette branche . 
+La branche est créer et nous sommes actuellement à la racine de cette branche . 
 
-Il est donc temps d'aporter des modification au code...
+Il est donc temps d'apporter des modifications au code...
 
 ## Etape 2 : Ajouter les modifications  
 
-Une fois que des modifications on était réalisées, on vas tout dabord faire un premier commit :
+Une fois que des modifications on était réalisées, on vas tout d'abord faire un premier commit :
+
 ### Git Add : 
 > `git add .` 
 > Commande qui permet d'ajouter toutes les modifications réalisé depuis le repertoire courant 
@@ -44,7 +45,7 @@ Une fois que des modifications on était réalisées, on vas tout dabord faire u
 
 ❗ Noubliez pas d'utiliser la commande `git status` pour vous aider.
 
-Une fois les modifications ajouter on vas pouvoir commit :
+Une fois les modifications ajoutées on va pouvoir commit :
 ### Git Commit
 
 > `git commit -m"[<type>/<branchID>]<commitMessage>"`
@@ -60,34 +61,35 @@ Une fois les modifications ajouter on vas pouvoir commit :
 ### Git Push
 
 > `git push --set-upstream remote <branchName>`
-> Permet de lier le repertoire local avec le répertoir distant ( remote )  
-> Cette liaison est necessaire pour réaliser plusieur push ou pull entre le remote et le repoLocal
+> Permet de lier le répertoire local avec le répertoire distant ( remote )  
+> Cette liaison est nécessaire pour réaliser plusieurs push ou pull entre le remote et le repoLocal
 
 Ton travail est ta branche sont maintenant ajouter au repo github
 
 ## Etape 3: Envoyer la Feature sur develop
 
 Nous voulons maintenant terminer la Feature. 
-Une protection à était mise en place pour réalisé les fusions de branches 
+Une protection à était mise en place pour réaliser les fusions de branches.  
 
-Il faut donc obligatoirement passé par une pullRequest qui nécessite une review d'une personne.
+Il faut donc obligatoirement passé par une pullRequest qui nécessite une review d'une personne. 
 
-Les github Actions nous permettent de réaliser des pull Request automatique
+Les githubs Actions nous permettent de réaliser des pull Request automatique.
 
 ### Git Push githubActions
 
-Lorsque l'on push sur github les commits réalisé, si le format du nom de branche correspond à une nouvelle feature alors l'action github ce lance.
+Lorsque l'on push sur github les commits réalisé, si le format du nom de branche correspond à une nouvelle feature alors l'action github ce lance. 
 Cependant au lancement de l'actions pour créer la pull request, l'actions utilise le dernier commit pour savoir quoi faire.
 
 les parametres : 
   1. "[draftPR]"  
-  il permet de lancer la création de la pull request en mode draft. Ce mode permet d'afficher la pull request de la feature permettant a tout le monde de visualisé le développement en cours, cependant le mode draft indique que le travaille n'est pas tout a fait fini et qu'il faut attendre avant de faire la premiére review et de fusioné le code dans la branche develop.
-  2 "[startPR]"  
-  il permet de lancer la création de la pull request totalement. La pull request ce lance et envoie une notification au reviewers pour verifier le code. une fois aumoins 1 review a était validé le code peux être mergé. 
+  il permet de lancer la création de la pull request en mode draft. Ce mode permet d'afficher la pull request de la feature permettant a tout le monde de visualisé le développement en cours, cependant le mode draft indique que le travaille n'est pas tout a fait fini et qu'il faut attendre avant de faire la première review et de fusionné le code dans la branche develop.
+  2. "[startPR]"  
+  il permet de lancer la création de la pull request totalement. La pull request ce lance et envoie une notification au reviewers pour verifier le code. une fois aumoins 1 review a était validé le code peux être fusionné. 
 
 Comment utiliser ces parametres :
-lors du dernier commit avant de push rajouter le parametre dans le commit
+lors du dernier commit avant de push rajouter le paramètre dans le commit
 > ` git commit -m"[Feature/04] add parameters explication [prStart]"`
+> ❗ Si aucun paramètre n'a était fournit la Pr n'est pas créer 
 
-La github action gérant les PR automatiques est disponible [ici](.github/workflows/pullRequest.yml)
+La github action gérant les PR automatiques est accessible [ici](.github/workflows/pullRequest.yml)
 
