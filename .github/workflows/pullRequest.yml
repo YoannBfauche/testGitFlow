@@ -30,3 +30,5 @@ jobs:
         pr_assignee: "${{ github.actor }}"
         pr_draft: ${{ steps.draftCondition.outputs.value }} # add draft mode or not
         github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: echo Draft Value
+      run: echo "The selected draft value is ${{ steps.draftCondition.outputs.value}}"
