@@ -1,7 +1,9 @@
 name: Auto-PR Feature
 on:
   push:
-    branches: [Feature/**/**]
+    branches: 
+    - [Feature/**/**]
+    - [BugFix/**/**]
     
 jobs:
   pull-request:
