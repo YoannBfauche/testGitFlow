@@ -73,4 +73,21 @@ Une protection à était mise en place pour réalisé les fusions de branches
 Il faut donc obligatoirement passé par une pullRequest qui nécessite une review d'une personne.
 
 Les github Actions nous permettent de réaliser des pull Request automatique
-### 
+
+### Git Push githubActions
+
+Lorsque l'on push sur github les commits réalisé, si le format du nom de branche correspond à une nouvelle feature alors l'action github ce lance.
+Cependant au lancement de l'actions pour créer la pull request, l'actions utilise le dernier commit pour savoir quoi faire.
+
+les parametres : 
+  1. "[draftPR]"  
+  il permet de lancer la création de la pull request en mode draft. Ce mode permet d'afficher la pull request de la feature permettant a tout le monde de visualisé le développement en cours, cependant le mode draft indique que le travaille n'est pas tout a fait fini et qu'il faut attendre avant de faire la premiére review et de fusioné le code dans la branche develop.
+  2 "[startPR]"  
+  il permet de lancer la création de la pull request totalement. La pull request ce lance et envoie une notification au reviewers pour verifier le code. une fois aumoins 1 review a était validé le code peux être mergé. 
+
+Comment utiliser ces parametres :
+lors du dernier commit avant de push rajouter le parametre dans le commit
+> ` git commit -m"[Feature/04] add parameters explication [prStart]"`
+
+La github action gérant les PR automatiques est disponible [ici](.github/workflows/pullRequest.yml)
+
