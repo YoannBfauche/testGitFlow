@@ -23,6 +23,7 @@ Pour ce faire nous allons lancer la commande suivante depuis la branche develop 
     - BugFix 
  2. branchID
     - 3 digits exemple : 005
+    - le numéro correspond au numéro de la carte dans trello.
  3. branchName
     - le sujet du développement lié à cette branche
 La branche est créer et nous sommes actuellement à la racine de cette branche . 
@@ -126,4 +127,8 @@ Pour réaliser une realease nous allons partir de la branche develop.
 La release consiste a lancer faire une nouvelle version en production avant cela nous devont réaliser des tests pour verifier que cette version sera fonctionelle en prod.
 Pour cela nous utilison la branche de test.
 
+Il faut créer une Pull Request de mise en test cette PR doit aller de develop vers test avec le numéro de version de la prochaine release. 
+
+Depuis github créer une PR et ajouter en reviewers les personnes présentes dans le projets. 
+lorsque la review a était faite nous pouvons fusioner la branche en test.
 
