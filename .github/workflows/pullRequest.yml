@@ -17,9 +17,9 @@ jobs:
       uses: haya14busa/action-cond@v1
       id: draftCondition
       with:
-        cond: "contains(github.event.head_commit.message,'[startPR]')"
-        if_true: false #draft is false 
-        if_false: true # draft is true
+        cond: "contains(github.event.head_commit.message,[draftPR])"
+        if_true: true #draft is false 
+        if_false: false # draft is true
 
     - name: create pull-request 
       if: "contains(github.event.head_commit.message,'[startPR]') || contains(github.event.head_commit.message,'[draftPR]')"
