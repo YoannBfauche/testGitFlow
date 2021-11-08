@@ -1,27 +1,36 @@
-# This is a basic workflow to help you get started with Actions
-
-name: CI
-
-# Controls when the workflow will run
+name: Auto-PR Feature
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ Feature/** ]
+    branches: 
+    - "Feature/**/**"
+    - "BugFix/**/**"
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  createPullRequest:
-  
+  pull-request:
+    name: Open PR to develop
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          body: >
-            This PR is auto-generated
-          labels: automated PR, Feature
+    - name: checkout
+      uses: actions/checkout@v2
+      
+    - name: condition draft PR
+      uses: haya14busa/action-cond@v1
+      id: draftCondition
+      with:
+        cond: "contains(github.event.head_commit.message,[draftPR])"
+        if_true: true #draft is false 
+        if_false: false # draft is true
+
+    - name: create pull-request 
+      if: "contains(github.event.head_commit.message,'[startPR]') || contains(github.event.head_commit.message,'[draftPR]')"
+      uses: repo-sync/pull-request@v2 
+      with:
+        destination_branch: "develop"
+        pr_title: "Pulling ${{ github.ref }} into develop"
+        pr_body: " :bangbang: *Automated Generate PR* with this runner :fast_forward:"
+        pr_reviewer: "DevFauche,YoannBfauche"
+        pr_assignee: "${{ github.actor }}"
+        pr_draft: ${{ steps.draftCondition.outputs.value }} # add draft mode or not.
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+    - name: echo Draft Value
+      run: echo "The selected draft value is ${{ steps.draftCondition.outputs.value}}"
