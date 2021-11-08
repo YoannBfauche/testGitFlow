@@ -1,8 +1,10 @@
 name: Auto-PR Feature
 on:
   push:
-    branches: [Feature/**/**]
-    
+    branches: 
+    - "Feature/**/**"
+    - "BugFix/**/**"
+
 jobs:
   pull-request:
     name: Open PR to develop
@@ -28,7 +30,7 @@ jobs:
         pr_body: " :bangbang: *Automated Generate PR* with this runner :fast_forward:"
         pr_reviewer: "DevFauche,YoannBfauche"
         pr_assignee: "${{ github.actor }}"
-        pr_draft: ${{ steps.draftCondition.outputs.value }} # add draft mode or not
+        pr_draft: ${{ steps.draftCondition.outputs.value }} # add draft mode or not, Cant pass a draft pr to open pr by ths strategy.
         github_token: ${{ secrets.GITHUB_TOKEN }}
     - name: echo Draft Value
       run: echo "The selected draft value is ${{ steps.draftCondition.outputs.value}}"
