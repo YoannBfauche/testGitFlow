@@ -2,9 +2,9 @@ name: Auto-PR Feature
 on:
   push:
     branches: 
-    - [Feature/**/**]
-    - [BugFix/**/**]
-    
+    - "Feature/**/**"
+    - "BugFix/**/**"
+
 jobs:
   pull-request:
     name: Open PR to develop
