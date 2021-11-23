@@ -61,7 +61,7 @@ Une fois les modifications ajoutées on va pouvoir commit :
 
 ### Git Push
 
-> `git push --set-upstream remote <branchName>`
+> `git push --set-upstream origin <branchName>`
 > Permet de lier le répertoire local avec le répertoire distant ( remote )  
 > Cette liaison est nécessaire pour réaliser plusieurs push ou pull entre le remote et le repoLocal
 
