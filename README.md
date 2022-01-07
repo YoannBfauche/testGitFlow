@@ -124,11 +124,15 @@ git pull
 # La gestion des releases 
 
 Pour réaliser une realease nous allons partir de la branche develop.
-La release consiste a lancer faire une nouvelle version en production avant cela nous devont réaliser des tests pour verifier que cette version sera fonctionelle en prod.
+La release consiste à lancer une nouvelle version en production avant cela nous devont réaliser des tests, pour verifier que cette version sera fonctionelle en prod.
 Pour cela nous utilison la branche de test.
 
-Il faut créer une Pull Request de mise en test cette PR doit aller de develop vers test avec le numéro de version de la prochaine release. 
+Il faut créer une Pull Request de mise en test, cette PR doit aller de develop vers test avec le numéro de version de la prochaine release. 
 
 Depuis github créer une PR et ajouter en reviewers les personnes présentes dans le projets. 
-lorsque la review a était faite nous pouvons fusioner la branche en test.
+lorsque la review a était faite nous pouvons fusioner la branche en test. 
+Pendant plusieurs jours nous laissont la branche de test et demandons des retour sur des potentiels bugs.
+une fois que la version est confirmé c'est le moment de passé en production. 
+Si il y a eut une modification dans la test il faut mettre a jour la develop en conséquence. 
+on peut ensuite faire un merge de la test vers la main. il faut également créer un tag de version cela permet de sauvegarder chaque version de production.
 
